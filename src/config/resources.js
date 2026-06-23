@@ -34,13 +34,13 @@ export const resources = {
   purchases: {
     title: 'Purchases', eyebrow: 'Stock procurement', endpoint: '/purchases',
     columns: ['invoiceNumber', 'dealerId', 'purchaseDate', 'items', 'totalAmount', 'paymentStatus'],
-    fields: [field('dealerId', 'Dealer ID', 'text', { required: true }), field('purchaseDate', 'Purchase date', 'date', { required: true }), field('items', 'Items JSON', 'json', { required: true, placeholder: '[{"productId":"...","quantity":1,"unitCost":100}]' }), field('totalAmount', 'Total amount', 'number', { required: true }), field('invoiceNumber', 'Invoice number', 'text', { required: true }), field('paymentStatus', 'Payment status', 'select', { options: ['Pending', 'Partial', 'Paid'] })],
+    fields: [field('dealerId', 'Dealer', 'select', { required: true, optionsSource: 'dealers' }), field('purchaseDate', 'Purchase date', 'date', { required: true }), field('items', 'Items', 'lineItems', { required: true, priceField: 'unitCost', priceLabel: 'Unit cost' }), field('totalAmount', 'Total amount', 'number', { required: true }), field('invoiceNumber', 'Invoice number', 'text', { required: true }), field('paymentStatus', 'Payment status', 'select', { options: ['Pending', 'Partial', 'Paid'] })],
     create: true, edit: true,
   },
   sales: {
     title: 'Sales', eyebrow: 'Customer transactions', endpoint: '/sales',
     columns: ['saleDate', 'customerId', 'items', 'totalAmount', 'paymentMethod', 'recordedBy'],
-    fields: [field('saleDate', 'Sale date', 'date', { required: true }), field('customerId', 'Customer ID', 'text', { required: true }), field('items', 'Items JSON', 'json', { required: true, placeholder: '[{"productId":"...","quantity":1,"unitPrice":100}]' }), field('totalAmount', 'Total amount', 'number', { required: true }), field('paymentMethod', 'Payment method', 'select', { options: ['Cash', 'UPI', 'Card', 'Credit'] })],
+    fields: [field('saleDate', 'Sale date', 'date', { required: true }), field('customerId', 'Customer', 'select', { required: true, optionsSource: 'customers' }), field('items', 'Items', 'lineItems', { required: true, priceField: 'unitPrice', priceLabel: 'Unit price' }), field('totalAmount', 'Total amount', 'number', { required: true }), field('paymentMethod', 'Payment method', 'select', { options: ['Cash', 'UPI', 'Card', 'Credit'] })],
     create: true, edit: true, delete: true,
   },
   expenses: {
@@ -52,7 +52,7 @@ export const resources = {
   users: {
     title: 'Users & Staff', eyebrow: 'Access administration', endpoint: '/users',
     columns: ['name', 'mobile', 'role', 'shopId', 'isActive', 'createdAt'],
-    fields: [field('name', 'Name', 'text', { required: true }), field('mobile', 'Mobile', 'tel', { required: true }), field('password', 'Password', 'password', { createOnly: true, required: true }), field('role', 'Role', 'select', { options: ['Admin', 'Staff'], required: true }), field('shopId', 'Shop ID', 'text', { required: true }), field('isActive', 'Account status', 'select', { options: [{ value: true, label: 'Active' }, { value: false, label: 'Inactive' }] })],
+    fields: [field('name', 'Name', 'text', { required: true }), field('mobile', 'Mobile', 'tel', { required: true }), field('password', 'Password', 'password', { createOnly: true, required: true }), field('role', 'Role', 'select', { options: ['Admin', 'Dealer', 'Staff'], required: true }), field('shopId', 'Shop', 'select', { required: true, optionsSource: 'shops' }), field('isActive', 'Account status', 'select', { options: [{ value: true, label: 'Active' }, { value: false, label: 'Inactive' }] })],
     create: true, edit: true,
   },
   shops: {

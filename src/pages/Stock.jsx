@@ -127,7 +127,7 @@ export default function Stock() {
       <form onSubmit={submit}>
         <div className="form-grid form-grid-single">
           <label>
-            <span>Product ID *</span>
+            <span>Product *</span>
             <select name="productId" required defaultValue="">
               <option value="" disabled>Select a product</option>
               {products.map((product) => (
