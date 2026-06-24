@@ -11,12 +11,13 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
+    "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest",
-    "lucide-react": "latest",
-    "recharts": "latest"
+    "read-excel-file": "^9.2.0",
+    "recharts": "latest",
+    "vite": "latest"
   },
   "devDependencies": {
     "@eslint/js": "latest",
@@ -26,4 +27,3 @@
     "globals": "latest"
   }
 }
-

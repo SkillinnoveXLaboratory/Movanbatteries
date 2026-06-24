@@ -5,13 +5,14 @@ export const resources = {
     title: 'Customers', eyebrow: 'Relationship management', endpoint: '/customers', searchable: true,
     columns: ['name', 'mobileNumber', 'vehicleNumbers', 'tags', 'createdAt'],
     fields: [field('name', 'Customer name', 'text', { required: true }), field('mobileNumber', 'Mobile number', 'tel', { required: true }), field('vehicleNumbers', 'Vehicle numbers', 'tags'), field('address', 'Address', 'textarea'), field('shopId', 'Shop', 'select', { required: true, optionsSource: 'shops' }), field('tags', 'Tags', 'tags')],
-    create: true, edit: true,
+    create: true, edit: true, delete: true, bulkImport: { endpoint: '/customers/import' },
   },
   batteries: {
     title: 'Registered Batteries', eyebrow: 'Warranty registry', endpoint: '/batteries', searchable: true,
     columns: ['batterySerialNumber', 'customerId', 'batteryBrand', 'batteryModel', 'vehicleNumber', 'purchaseDate', 'warrantyPeriodMonths'],
-    fields: [field('customerId', 'Customer', 'select', { required: true, optionsSource: 'customers' }), field('batteryBrand', 'Brand', 'text', { required: true }), field('batteryModel', 'Model', 'text', { required: true }), field('batterySerialNumber', 'Serial number', 'text', { required: true }), field('purchaseDate', 'Purchase date', 'date', { required: true }), field('warrantyPeriodMonths', 'Warranty (months)', 'number', { required: true }), field('invoiceNumber', 'Invoice number'), field('vehicleNumber', 'Vehicle number')],
-    create: true, edit: true,
+    fields: [field('customerId', 'Customer', 'select', { required: true, optionsSource: 'customers' }), field('batteryBrand', 'Brand', 'select', { required: true, optionsSource: 'batteryBrands', clears: ['batteryModel'] }), field('batteryModel', 'Model', 'select', { required: true, optionsSource: 'batteryModels', dependsOn: 'batteryBrand', optionFilterKey: 'brand' }), field('batterySerialNumber', 'Serial number', 'text', { required: true }), field('purchaseDate', 'Purchase date', 'date', { required: true }), field('warrantyPeriodMonths', 'Warranty (months)', 'number', { required: true }), field('invoiceNumber', 'Invoice number'), field('vehicleNumber', 'Vehicle number')],
+    filters: [field('brand', 'Brand', 'select', { optionsSource: 'batteryBrands' }), field('model', 'Model', 'select', { optionsSource: 'batteryModels', dependsOn: 'brand', optionFilterKey: 'brand' }), field('customerId', 'Customer', 'select', { optionsSource: 'customers' })],
+    create: true, edit: true, delete: true,
   },
   loaners: {
     title: 'Loaner Batteries', eyebrow: 'Temporary battery fleet', endpoint: '/loaner-batteries',
